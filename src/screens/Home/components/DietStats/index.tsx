@@ -1,12 +1,18 @@
 import { Container, IconLinkIndicator, InfoText, Percent } from "./styles";
 
-export function DietStats() {
+type DietStatsProps = {
+  percent: number
+}
+
+export function DietStats({ percent }: DietStatsProps) {
   return(
-    <Container>
-      <IconLinkIndicator />
+    <Container
+      variant={percent > 69.99 ? 'PRIMARY' : 'SECONDARY'}
+    >
+      <IconLinkIndicator variant={percent > 69.99 ? 'PRIMARY' : 'SECONDARY'} />
 
       <Percent>
-        90,86%
+        {percent}%
       </Percent>
       <InfoText>das refeições dentro da dieta</InfoText>
     </Container>

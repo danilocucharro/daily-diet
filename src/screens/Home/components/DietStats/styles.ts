@@ -1,17 +1,25 @@
 import styled from "styled-components/native";
 import { ArrowUpRight } from "phosphor-react-native";
 
-export const Container = styled.TouchableOpacity`
+export type DietStatsVariantStyleProps = 'PRIMARY' | 'SECONDARY'
+
+type DietStatsStyleProps = {
+  variant: DietStatsVariantStyleProps
+}
+
+export const Container = styled.TouchableOpacity<DietStatsStyleProps>`
   width: 100%;
 
   margin-top: 36px;
+  margin-bottom: 36px;
   padding: 20px 16px;
-  background-color: ${({ theme }) => theme.COLORS.GREEN_100};
+  background-color: ${({ theme, variant }) => 
+  variant === 'PRIMARY' ? theme.COLORS.GREEN_100 : theme.COLORS.RED_100};
   border-radius: 8px;
 `;
 
-export const IconLinkIndicator = styled(ArrowUpRight).attrs(({ theme }) => ({
-  color: theme.COLORS.GREEN_700,
+export const IconLinkIndicator = styled(ArrowUpRight).attrs<DietStatsStyleProps>(({ theme, variant }) => ({
+  color: variant === 'PRIMARY' ? theme.COLORS.GREEN_700 : theme.COLORS.RED_700,
   size: 24,
 }))`
   margin-left: auto;

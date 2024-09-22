@@ -9,12 +9,14 @@ type ButtonStyleProps = {
 
 export const Container = styled(TouchableOpacity)<ButtonStyleProps>`
   flex: 1;
+  flex-direction: row;
 
   max-height: 50px;
   min-height: 50px;
 
   justify-content: center;
   align-items: center;
+  gap: 12px;
 
   background-color: ${({ theme, variant }) => 
   variant === 'PRIMARY' ? theme.COLORS.GRAY_600 : theme.COLORS.GRAY_100};

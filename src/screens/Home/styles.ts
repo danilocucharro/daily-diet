@@ -27,3 +27,22 @@ export const UserInfo = styled.Image`
   border: 2px solid ${({ theme }) => theme.COLORS.GRAY_600};
   border-radius: 999px;
 `;
+
+export const MealsTitle = styled.Text`
+  color: ${({ theme }) => theme.COLORS.GRAY_700};
+  font-size: ${({ theme }) => theme.FONT_SIZE.BODY_M}px;
+  font-family: ${({ theme }) => theme.FONT_FAMILY.REGULAR};
+`;
+
+export const DailyList = styled.View`
+  width: 100%;
+
+  margin-top: 38px;
+  gap: 8px;
+`;
+
+export const DailyListTitle = styled.Text`
+  font-family: ${({ theme }) => theme.FONT_FAMILY.BOLD};
+  font-size: ${({ theme }) => theme.FONT_SIZE.TITLE_S}px;
+  color: ${({ theme }) => theme.COLORS.GRAY_700};
+`;
