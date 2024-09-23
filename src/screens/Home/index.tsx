@@ -1,14 +1,18 @@
-import { Container, DailyList, DailyListTitle, Header, Logo, MealsTitle, UserInfo } from "./styles";
+import { ScrollView, View } from "react-native";
+
+import { DietStats } from "./components/DietStats";
+import { Button } from "@components/Button";
+import { MealCard } from "./components/MealCard";
 
 import logoImg from "@assets/logo.png"
 import userImg from "@assets/user-photo.png"
-import { ScrollView, Text, View } from "react-native";
-import { DietStats } from "./components/DietStats";
-import { Button } from "@components/Button";
-import theme from "src/theme";
-import { MealCard } from "./components/MealCard";
+
+import { Container, DailyList, DailyListTitle, Header, Logo, MealsTitle, UserInfo } from "./styles";
+import { useNavigation } from "@react-navigation/native";
 
 export function Home() {
+  const navigation = useNavigation()
+
   return(
     <Container>
       <Header>
@@ -18,7 +22,8 @@ export function Home() {
       </Header>
       
       <DietStats 
-        percent={70}
+        percent={91.36}
+        onPress={() => navigation.navigate('statistics')}
       />
 
       <View style={{marginBottom: 38, gap: 4, height: "auto"}}>
@@ -29,7 +34,7 @@ export function Home() {
         />
       </View>
       
-      <ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}>
         <DailyList>
           <DailyListTitle>22.09.24</DailyListTitle>
 

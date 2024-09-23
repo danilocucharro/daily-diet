@@ -1,13 +1,15 @@
 import styled from "styled-components/native";
 import { ArrowUpRight } from "phosphor-react-native";
 
+import { TouchableOpacity } from "react-native";
+
 export type DietStatsVariantStyleProps = 'PRIMARY' | 'SECONDARY'
 
 type DietStatsStyleProps = {
   variant: DietStatsVariantStyleProps
 }
 
-export const Container = styled.TouchableOpacity<DietStatsStyleProps>`
+export const Container = styled(TouchableOpacity)<DietStatsStyleProps>`
   width: 100%;
 
   margin-top: 36px;
