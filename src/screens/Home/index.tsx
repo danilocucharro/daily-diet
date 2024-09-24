@@ -26,11 +26,12 @@ export function Home() {
         onPress={() => navigation.navigate('statistics')}
       />
 
-      <View style={{marginBottom: 38, gap: 4, height: "auto"}}>
+      <View style={{marginBottom: 38, gap: 4}}>
         <MealsTitle>Refeições</MealsTitle>
         
         <Button 
           title="Nova refeição"
+          onPress={() => navigation.navigate('newMeal')}
         />
       </View>
       

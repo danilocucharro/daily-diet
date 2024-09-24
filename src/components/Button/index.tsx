@@ -1,4 +1,3 @@
-import { Plus } from "phosphor-react-native";
 import { ButtonVariantStyleProps, Container, Title } from "./styles";
 import { TouchableOpacityProps } from "react-native";
 
@@ -7,12 +6,12 @@ type ButtonProps = TouchableOpacityProps &{
   variant?: ButtonVariantStyleProps
 }
 
-export function Button({ title, variant = 'PRIMARY' }: ButtonProps) {
+export function Button({ title, variant = 'PRIMARY', ...rest }: ButtonProps) {
   return(
     <Container
       variant={variant}
+      {...rest}
     >
-      <Plus size={20} color="#FFFFFF"/>
       <Title variant={variant}>{title}</Title>
     </Container>
   )
