@@ -4,6 +4,7 @@ export declare global {
       home: undefined;
       statistics: undefined;
       newMeal: undefined;
+      mealFeedback: undefined // por enquanto undefined
       editMeal: undefined;
     }
   }

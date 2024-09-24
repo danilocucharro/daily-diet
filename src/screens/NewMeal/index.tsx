@@ -57,6 +57,7 @@ export function NewMeal() {
           <Button 
             title="Cadastrar refeição"
             style={{ marginTop: 10 }}
+            onPress={() => navigation.navigate('mealFeedback')}
           />
         </Form>
       </Container>

@@ -8,15 +8,12 @@ type ButtonStyleProps = {
 }
 
 export const Container = styled(TouchableOpacity)<ButtonStyleProps>`
-  flex: 1;
-  flex-direction: row;
+  width: 100%;
 
-  max-height: 50px;
-  min-height: 50px;
-
+  padding: 16px 24px;
+  gap: 12px;
   justify-content: center;
   align-items: center;
-  gap: 12px;
 
   background-color: ${({ theme, variant }) => 
   variant === 'PRIMARY' ? theme.COLORS.GRAY_600 : theme.COLORS.GRAY_100};
@@ -29,7 +26,6 @@ export const Container = styled(TouchableOpacity)<ButtonStyleProps>`
 export const Title = styled.Text<ButtonStyleProps>`
   font-family: ${({ theme }) => theme.FONT_FAMILY.BOLD};
   font-size: ${({ theme }) => theme.FONT_SIZE.TITLE_XS}px;
-
   color: ${({ theme, variant }) => 
   variant === 'PRIMARY' ? theme.COLORS.WHITE : theme.COLORS.GRAY_100};
 `;
