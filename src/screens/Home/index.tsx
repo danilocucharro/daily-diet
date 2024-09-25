@@ -27,7 +27,7 @@ export function Home() {
         onPress={() => navigation.navigate('statistics')}
       />
 
-      <View style={{marginBottom: 38, gap: 4}}>
+      <View style={{marginBottom: 10, gap: 4}}>
         <MealsTitle>Refeições</MealsTitle>
         
         <Button 

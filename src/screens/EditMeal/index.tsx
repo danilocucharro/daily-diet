@@ -1,4 +1,4 @@
-import { View } from "react-native";
+import { TextInput, View } from "react-native";
 import { Fragment } from "react";
 import { useNavigation } from "@react-navigation/native";
 
@@ -7,7 +7,7 @@ import { ChoiceButton } from "@components/ChoiceButton";
 
 import { Container, Form, Header, IconGoBack, Input, InputContainer, InputLabel, TimeInput, TimeInputContainer, Title } from "./styles";
 
-export function NewMeal() {
+export function EditMeal() {
   const navigation = useNavigation()
 
   return(
@@ -15,7 +15,7 @@ export function NewMeal() {
       <Header>
         <IconGoBack onPress={() => navigation.navigate('home')}/>
 
-        <Title>Nova refeição</Title>
+        <Title>Editar refeição</Title>
       </Header>
 
       <Container>
@@ -56,8 +56,8 @@ export function NewMeal() {
           </InputContainer>
 
           <Button 
-            title="Cadastrar refeição"
-            style={{ marginTop: 10 }}
+            title="Salvar alterações"
+            style={{ marginTop: "auto" }}
             onPress={() => navigation.navigate('mealFeedback')}
           />
         </Form>

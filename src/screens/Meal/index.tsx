@@ -39,6 +39,7 @@ export function Meal() {
           <Button 
             variant="PRIMARY"
             title="Editar refeição"
+            onPress={() => navigation.navigate('editMeal')}
           >
             <PencilSimpleLine color={theme.COLORS.WHITE} size={18} />
           </Button>

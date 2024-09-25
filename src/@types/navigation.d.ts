@@ -6,6 +6,7 @@ export declare global {
       newMeal: undefined;
       mealFeedback: undefined // por enquanto undefined
       meal: undefined; // por enquanto undfined
+      editMeal: undefined; // por enquanto undfined
     }
   }
 }

@@ -1,5 +1,3 @@
-import { ButtonProps, View } from "react-native";
-
 import { ButtonTitle, Container, Content, DietIndicator } from "./styles";
 
 type ChoiceButtonProps = {
