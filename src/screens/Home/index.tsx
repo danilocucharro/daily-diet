@@ -9,6 +9,7 @@ import userImg from "@assets/user-photo.png"
 
 import { Container, DailyList, DailyListTitle, Header, Logo, MealsTitle, UserInfo } from "./styles";
 import { useNavigation } from "@react-navigation/native";
+import { Plus } from "phosphor-react-native";
 
 export function Home() {
   const navigation = useNavigation()
@@ -32,7 +33,9 @@ export function Home() {
         <Button 
           title="Nova refeição"
           onPress={() => navigation.navigate('newMeal')}
-        />
+        >
+          <Plus color="#FFFFFF" size={18} />
+        </Button>
       </View>
       
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -43,6 +46,7 @@ export function Home() {
             mealName="X-Burguer"
             createdAt="20:00"
             dietIndicator="OFF_DIET"
+            onPress={() => navigation.navigate('meal')}
           />
           <MealCard 
             mealName="Wheyzao brabo"

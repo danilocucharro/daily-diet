@@ -4,7 +4,13 @@ import { TouchableOpacityProps } from "react-native";
 
 import { ArrowLeft } from "phosphor-react-native";
 
-export const Header = styled.View`
+type MealVariantStyleProps = 'PRIMARY' | 'SECONDARY'
+
+type MealStyleProps = {
+  variant: MealVariantStyleProps
+}
+
+export const Header = styled.View<MealStyleProps>`
   flex-direction: row;
   width: 100%;
   height: 130px;
@@ -12,7 +18,8 @@ export const Header = styled.View`
   padding: 24px 24px 36px 24px;
   align-items: flex-end;
 
-  background-color: ${({ theme }) => theme.COLORS.GRAY_300};
+  background-color: ${({ theme, variant }) =>
+  variant === 'PRIMARY' ? theme.COLORS.GREEN_100 : theme.COLORS.RED_100};
 `;
 
 export const Title = styled.Text`
@@ -41,43 +48,29 @@ export const Container = styled.View`
   border-top-right-radius: 20px;
 `;
 
-export const Form = styled.View`
-  flex: 1;
-  width: 100%;
+export const InfoMealContent = styled.View`
   gap: 24px;
 `;
 
-export const InputContainer = styled.View`
-  gap: 4px;
-  width: 100%;
-`;
-
-export const TimeInputContainer = styled.View`
-  gap: 4px;
-  flex: 1;
-`;
-
-export const InputLabel = styled.Text`
+export const MealName = styled.Text`
   font-family: ${({ theme }) => theme.FONT_FAMILY.BOLD};
-  font-size: ${({ theme }) => theme.FONT_SIZE.TITLE_XS}px;
+  font-size: 20px;
+  color: ${({ theme }) => theme.COLORS.GRAY_700};
+`;
+
+export const MealDescription = styled.Text`
+  font-family: ${({ theme }) => theme.FONT_FAMILY.REGULAR};
+  font-size: ${({ theme }) => theme.FONT_SIZE.BODY_M}px;
   color: ${({ theme }) => theme.COLORS.GRAY_600};
 `;
 
-export const Input = styled.TextInput`
-  width: 100%;
-
-  border: 1px solid ${({ theme }) => theme.COLORS.GRAY_300};
-  border-radius: 6px;
-  padding: 14px;
-  align-items: flex-start;
-
+export const MealDate = styled.Text`
   font-family: ${({ theme }) => theme.FONT_FAMILY.BOLD};
   font-size: ${({ theme }) => theme.FONT_SIZE.TITLE_XS}px;
-  color: ${({ theme }) => theme.COLORS.GRAY_600};
+  color: ${({ theme }) => theme.COLORS.GRAY_700};
 `;
 
-export const TimeInput = styled.TextInput`
-  border: 1px solid ${({ theme }) => theme.COLORS.GRAY_300};
-  border-radius: 6px;
-  padding: 14px;
+export const ButtonContainer = styled.View`
+  gap: 8px;
+  margin-top: auto;
 `;

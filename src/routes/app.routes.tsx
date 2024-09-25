@@ -1,6 +1,8 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
+//import { EditMeal } from "@screens/EditMeal";
 import { Home } from "@screens/Home";
+import { Meal } from "@screens/Meal";
 import { MealFeedback } from "@screens/MealFeedback";
 import { NewMeal } from "@screens/NewMeal";
 import { Statistics } from "@screens/Statistics";
@@ -21,9 +23,6 @@ export function AppRoutes () {
       <Screen 
         name="statistics"
         component={Statistics}
-        options={{
-          headerShown: false
-        }}
       />
 
       <Screen 
@@ -34,6 +33,11 @@ export function AppRoutes () {
       <Screen 
         name="mealFeedback"
         component={MealFeedback}
+      />
+
+      <Screen 
+        name="meal"
+        component={Meal}
       />
     </Navigator>
   )

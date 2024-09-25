@@ -1,3 +1,4 @@
+import { TouchableOpacity } from "react-native";
 import styled from "styled-components/native";
 
 export type MealCardVariantStyleProps = 'ON_DIET' | 'OFF_DIET'
@@ -6,7 +7,7 @@ type MealCardStyleProps = {
   variant: MealCardVariantStyleProps
 }
 
-export const Container = styled.TouchableOpacity`
+export const Container = styled(TouchableOpacity)`
   flex: 1;
   flex-direction: row;
 
@@ -38,7 +39,7 @@ export const MealName = styled.Text`
   flex: 1;
 
   font-family: ${({ theme }) => theme.FONT_FAMILY.REGULAR};
-  font-size: ${({ theme }) => theme.FONT_SIZE.BODY_S}px;
+  font-size: ${({ theme }) => theme.FONT_SIZE.BODY_M}px;
   color: ${({ theme }) => theme.COLORS.GRAY_600};
 `;
 

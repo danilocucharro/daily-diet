@@ -1,6 +1,7 @@
+import { TouchableOpacityProps } from "react-native";
 import { Container, DietIndicator, MealDate, MealName, Separator, MealCardVariantStyleProps } from "./styles";
 
-type MealCardProps = {
+type MealCardProps = TouchableOpacityProps &{
   mealName: string;
   createdAt: string;
   dietIndicator: MealCardVariantStyleProps;
@@ -9,10 +10,11 @@ type MealCardProps = {
 export function MealCard({
   mealName,
   dietIndicator,
-  createdAt
+  createdAt,
+  ...rest
 }: MealCardProps) {
   return(
-    <Container>
+    <Container {...rest}>
       <MealDate>{createdAt}</MealDate>
 
       <Separator />

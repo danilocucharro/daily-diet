@@ -8,6 +8,7 @@ type ButtonStyleProps = {
 }
 
 export const Container = styled(TouchableOpacity)<ButtonStyleProps>`
+  flex-direction: row;
   width: 100%;
 
   padding: 16px 24px;
@@ -27,5 +28,5 @@ export const Title = styled.Text<ButtonStyleProps>`
   font-family: ${({ theme }) => theme.FONT_FAMILY.BOLD};
   font-size: ${({ theme }) => theme.FONT_SIZE.TITLE_XS}px;
   color: ${({ theme, variant }) => 
-  variant === 'PRIMARY' ? theme.COLORS.WHITE : theme.COLORS.GRAY_100};
+  variant === 'PRIMARY' ? theme.COLORS.WHITE : theme.COLORS.GRAY_700};
 `;
