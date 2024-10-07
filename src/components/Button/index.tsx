@@ -1,5 +1,5 @@
 import { ReactElement } from "react";
-import { ButtonVariantStyleProps, Container, Title } from "./styles";
+import { ButtonVariantStyleProps, Container, Content, Title } from "./styles";
 import { TouchableOpacityProps } from "react-native";
 
 type ButtonProps = TouchableOpacityProps &{
@@ -14,8 +14,10 @@ export function Button({ title, variant = 'PRIMARY', children, ...rest }: Button
       variant={variant}
       {...rest}
     >
-      {children}
-      <Title variant={variant}>{title}</Title>
+      <Content>
+        {children}
+        <Title variant={variant}>{title}</Title>
+      </Content>
     </Container>
   )
 }

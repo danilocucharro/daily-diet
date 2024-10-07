@@ -64,31 +64,6 @@ export function Home() {
             dietIndicator="ON_DIET"
           />
         </DailyList>
-
-        <DailyList>
-          <DailyListTitle>21.09.24</DailyListTitle>
-
-          <MealCard 
-            mealName="X-Burguer"
-            createdAt="20:00"
-            dietIndicator="OFF_DIET"
-          />
-          <MealCard 
-            mealName="Wheyzao brabo"
-            createdAt="16:00"
-            dietIndicator="ON_DIET"
-          />
-          <MealCard 
-            mealName="Filezin ne pae"
-            createdAt="12:00"
-            dietIndicator="ON_DIET"
-          />
-          <MealCard 
-            mealName="pao com bosta"
-            createdAt="07:00"
-            dietIndicator="ON_DIET"
-          />
-        </DailyList>
       </ScrollView>
     </Container>
   )
