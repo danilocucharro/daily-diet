@@ -34,6 +34,7 @@ export const IconGoBack = styled(ArrowLeft).attrs<TouchableOpacityProps>(({ them
   color: theme.COLORS.GRAY_600,
   size: 24,
 }))`
+  z-index: 1;
   margin-right: auto;
 `;
 

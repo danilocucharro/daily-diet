@@ -11,6 +11,7 @@ export const Container = styled(TouchableOpacity)`
   flex: 1;
   flex-direction: row;
 
+  margin-top: 8px;
   min-height: 50px;
   max-height: 50px;
   align-items: center;

@@ -34,14 +34,9 @@ export const MealsTitle = styled.Text`
   font-family: ${({ theme }) => theme.FONT_FAMILY.REGULAR};
 `;
 
-export const DailyList = styled.View`
-  width: 100%;
-
-  margin-top: 38px;
-  gap: 8px;
-`;
-
 export const DailyListTitle = styled.Text`
+  margin-top: 38px;
+
   font-family: ${({ theme }) => theme.FONT_FAMILY.BOLD};
   font-size: ${({ theme }) => theme.FONT_SIZE.TITLE_S}px;
   color: ${({ theme }) => theme.COLORS.GRAY_700};

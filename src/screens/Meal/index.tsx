@@ -1,5 +1,5 @@
 import { Fragment } from "react";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 
 import { Header, Container, IconGoBack, Title, MealName, InfoMealContent, MealDescription, MealDate, ButtonContainer } from "./styles";
 import { View } from "react-native";
@@ -7,12 +7,28 @@ import { DietStatusCard } from "./components/DietStatusCard";
 import { Button } from "@components/Button";
 import { PencilSimpleLine, Trash } from "phosphor-react-native";
 import theme from "src/theme";
+import { DateType } from "react-native-ui-datepicker";
+
+type RouteParams = {
+  mealName: string;
+  mealDescription: string;
+  createdAt: DateType;
+  dietStatus: 'ON_DIET' | 'OFF_DIET'
+}
 
 export function Meal() {
   const navigation = useNavigation()
+  const route = useRoute()
+  const { 
+    mealName, 
+    mealDescription, 
+    createdAt, 
+    dietStatus 
+  } = route.params as RouteParams
+
   return(
     <Fragment>
-      <Header variant="PRIMARY">
+      <Header variant={dietStatus === 'ON_DIET' ? 'PRIMARY' : 'SECONDARY'}>
         <IconGoBack onPress={() => navigation.navigate('home')}/>
 
         <Title>Refeição</Title>
@@ -21,18 +37,21 @@ export function Meal() {
       <Container>
         <InfoMealContent>
           <View style={{ gap: 8 }}>
-            <MealName>Sanduíche</MealName>
+            <MealName>{mealName}</MealName>
 
-            <MealDescription>Sanduíche de pão integral com atum e salada de alface e tomate</MealDescription>
+            <MealDescription>{mealDescription}</MealDescription>
           </View>
 
           <View style={{ gap: 8 }}>
             <MealDate>Data e hora</MealDate>
 
-            <MealDescription>12/08/2022 às 16:00</MealDescription>
+            <MealDescription>{createdAt?.toString()}</MealDescription>
           </View>
 
-          <DietStatusCard variant="PRIMARY" title="dentro da dieta" />
+          <DietStatusCard 
+            variant={dietStatus === 'ON_DIET' ? 'PRIMARY' : 'SECONDARY'} 
+            title={dietStatus === 'ON_DIET' ? 'dentro da dieta' : 'fora da dieta'}
+          />
         </InfoMealContent>
 
         <ButtonContainer>

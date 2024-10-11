@@ -28,6 +28,7 @@ export const IconGoBack = styled(ArrowLeft).attrs<TouchableOpacityProps>(({ them
   color: theme.COLORS.GRAY_600,
   size: 24,
 }))`
+  z-index: 1;
   margin-right: auto;
 `;
 
@@ -86,8 +87,6 @@ export const TimeInput = styled.TextInput`
 export const DatePickerModal = styled.View`
   z-index: 1;
 
-  align-items: center;
-
   background-color: ${({ theme }) => theme.COLORS.GRAY_200};
   opacity: 0.95;
 `;
@@ -98,8 +97,11 @@ export const DateTimeInput = styled(DateTimePicker).attrs(({ theme }) => ({
 `;
 
 export const SaveDateTimeButton = styled.TouchableOpacity`
+  width: 58px;
   padding: 8px;
   margin-bottom: 24px;
+  margin-left: auto;
+  margin-right: 24px;
 
   border-radius: 999px;
   background-color: ${({ theme }) => theme.COLORS.GRAY_700};

@@ -1,4 +1,4 @@
-import { ScrollView, View } from "react-native";
+import { FlatList, View } from "react-native";
 
 import { DietStats } from "./components/DietStats";
 import { Button } from "@components/Button";
@@ -7,12 +7,29 @@ import { MealCard } from "./components/MealCard";
 import logoImg from "@assets/logo.png"
 import userImg from "@assets/user-photo.png"
 
-import { Container, DailyList, DailyListTitle, Header, Logo, MealsTitle, UserInfo } from "./styles";
-import { useNavigation } from "@react-navigation/native";
+import { Container, DailyListTitle, Header, Logo, MealsTitle, UserInfo } from "./styles";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { Plus } from "phosphor-react-native";
+import { useCallback, useEffect, useState } from "react";
+import { MealStorageDTO } from "@storage/meal/MealStorageDTO";
+import { getMeals } from "@storage/meal/getMeals";
 
 export function Home() {
+  const [meals, setMeals] = useState<MealStorageDTO[]>([])
   const navigation = useNavigation()
+
+  async function fetchMeals() {
+    try {
+      const mealsData = await getMeals()
+      setMeals(mealsData)
+    } catch (error) {
+      throw error
+    }
+  }
+
+  useFocusEffect(useCallback(() => {
+    fetchMeals()
+  }, []))
 
   return(
     <Container>
@@ -37,34 +54,25 @@ export function Home() {
           <Plus color="#FFFFFF" size={18} />
         </Button>
       </View>
-      
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <DailyList>
-          <DailyListTitle>22.09.24</DailyListTitle>
-
-          <MealCard 
-            mealName="X-Burguer"
-            createdAt="20:00"
-            dietIndicator="OFF_DIET"
-            onPress={() => navigation.navigate('meal')}
-          />
-          <MealCard 
-            mealName="Wheyzao brabo"
-            createdAt="16:00"
-            dietIndicator="ON_DIET"
-          />
-          <MealCard 
-            mealName="Filezin ne pae"
-            createdAt="12:00"
-            dietIndicator="ON_DIET"
-          />
-          <MealCard 
-            mealName="pao com bosta"
-            createdAt="07:00"
-            dietIndicator="ON_DIET"
-          />
-        </DailyList>
-      </ScrollView>
+        
+      <DailyListTitle>22.09.24</DailyListTitle>
+        <FlatList
+          data={meals}
+          keyExtractor={item => item.description}
+          renderItem={({ item }) => (
+            <MealCard 
+              mealName={item.name}
+              createdAt={item.createdAt}
+              dietIndicator={item.dietStatus}
+              onPress={() => navigation.navigate('meal', {
+                mealName: item.name,
+                mealDescription: item.description,
+                createdAt: item.createdAt,
+                dietStatus: item.dietStatus
+              })}
+            />
+          )}
+        />
     </Container>
   )
 }
