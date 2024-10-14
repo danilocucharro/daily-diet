@@ -3,6 +3,7 @@ import styled from "styled-components/native";
 import { TouchableOpacityProps } from "react-native";
 
 import { ArrowLeft } from "phosphor-react-native";
+import DateTimePicker from "react-native-ui-datepicker";
 
 export const Header = styled.View`
   flex-direction: row;
@@ -27,6 +28,7 @@ export const IconGoBack = styled(ArrowLeft).attrs<TouchableOpacityProps>(({ them
   color: theme.COLORS.GRAY_600,
   size: 24,
 }))`
+  z-index: 1;
   margin-right: auto;
 `;
 
@@ -80,4 +82,26 @@ export const TimeInput = styled.TextInput`
   border: 1px solid ${({ theme }) => theme.COLORS.GRAY_300};
   border-radius: 6px;
   padding: 14px;
+`;
+
+export const DateTimeInput = styled(DateTimePicker).attrs(({ theme }) => ({
+  selectedItemColor: theme.COLORS.GRAY_700,
+}))`
+`;
+
+export const SaveDateTimeButton = styled.TouchableOpacity`
+  width: 58px;
+  padding: 8px;
+  margin-bottom: 24px;
+  margin-left: auto;
+  margin-right: 24px;
+
+  border-radius: 999px;
+  background-color: ${({ theme }) => theme.COLORS.GRAY_700};
+`;
+
+export const TitleButton = styled.Text`
+  font-family: ${({ theme }) => theme.FONT_FAMILY.BOLD};
+  font-size: ${({ theme }) => theme.FONT_SIZE.TITLE_XS}px;
+  color: ${({ theme }) => theme.COLORS.GRAY_100};
 `;

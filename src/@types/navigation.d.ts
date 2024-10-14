@@ -15,7 +15,10 @@ export declare global {
         createdAt: DateType;
         dietStatus: 'ON_DIET' | 'OFF_DIET'
       };
-      editMeal: undefined; // por enquanto undfined
+      editMeal: {
+        mealName: string;
+        mealDescription: string;
+      };
     }
   }
 }

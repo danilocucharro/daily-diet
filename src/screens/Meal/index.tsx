@@ -26,6 +26,13 @@ export function Meal() {
     dietStatus 
   } = route.params as RouteParams
 
+  function handleEditMeal() {
+    navigation.navigate('editMeal', {
+      mealName: mealName,
+      mealDescription: mealDescription
+    })
+  }
+
   return(
     <Fragment>
       <Header variant={dietStatus === 'ON_DIET' ? 'PRIMARY' : 'SECONDARY'}>
@@ -58,7 +65,7 @@ export function Meal() {
           <Button 
             variant="PRIMARY"
             title="Editar refeição"
-            onPress={() => navigation.navigate('editMeal')}
+            onPress={handleEditMeal}
           >
             <PencilSimpleLine color={theme.COLORS.WHITE} size={18} />
           </Button>
