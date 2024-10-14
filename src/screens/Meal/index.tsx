@@ -2,12 +2,14 @@ import { Fragment } from "react";
 import { useNavigation, useRoute } from "@react-navigation/native";
 
 import { Header, Container, IconGoBack, Title, MealName, InfoMealContent, MealDescription, MealDate, ButtonContainer } from "./styles";
-import { View } from "react-native";
+import { Alert, View } from "react-native";
 import { DietStatusCard } from "./components/DietStatusCard";
 import { Button } from "@components/Button";
 import { PencilSimpleLine, Trash } from "phosphor-react-native";
 import theme from "src/theme";
 import { DateType } from "react-native-ui-datepicker";
+import { deleteMeal } from "@storage/meal/deleteMeal";
+import { AppError } from "src/utils/AppError";
 
 type RouteParams = {
   mealName: string;
@@ -31,6 +33,23 @@ export function Meal() {
       mealName: mealName,
       mealDescription: mealDescription
     })
+  }
+
+  async function handleDeleteMeal() {
+    Alert.alert("Excluir", "Deseja excluir essa refeição?", [
+      {
+        text: "Não",
+        style: "cancel"
+      },
+      {
+        text: "Sim",
+        onPress: async () => {
+          await deleteMeal(mealDescription)
+          navigation.navigate("home")
+          Alert.alert("Excluir", "A refeição foi removida!")
+        }
+      }
+    ])
   }
 
   return(
@@ -73,6 +92,7 @@ export function Meal() {
           <Button 
             variant="SECONDARY"
             title="Excluir refeição"
+            onPress={handleDeleteMeal}
           >
             <Trash color={theme.COLORS.GRAY_700} size={18} />
           </Button>

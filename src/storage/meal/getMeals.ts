@@ -6,9 +6,8 @@ import { MealStorageDTO } from "./MealStorageDTO";
 export async function getMeals() {
   try {
     const mealsStoraged = await AsyncStorage.getItem(MEAL_COLLECTION)
-
     const mealsData: MealStorageDTO[] = mealsStoraged ? JSON.parse(mealsStoraged) : []
-    console.log(mealsData)
+
     return mealsData
   } catch (error) {
     throw error
