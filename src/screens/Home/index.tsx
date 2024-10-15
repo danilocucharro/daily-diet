@@ -47,10 +47,7 @@ export function Home() {
         <UserInfo source={userImg}/>
       </Header>
       
-      <DietStats 
-        percent={91.36}
-        onPress={() => navigation.navigate('statistics')}
-      />
+      <DietStats />
 
       <View style={{marginBottom: 10, gap: 4}}>
         <MealsTitle>Refeições</MealsTitle>

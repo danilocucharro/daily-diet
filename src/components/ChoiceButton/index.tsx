@@ -6,7 +6,11 @@ type ChoiceButtonProps = TouchableHighlightProps & {
   title: string;
 }
 
-export function ChoiceButton({ variant, title, ...rest }: ChoiceButtonProps) {
+export function ChoiceButton({ 
+  variant, 
+  title,
+  ...rest 
+}: ChoiceButtonProps) {
   return(
     <Container 
       underlayColor={variant === 'PRIMARY' ? "#E5F0DB" : "#F4E6E7"}

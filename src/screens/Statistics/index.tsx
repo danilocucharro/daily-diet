@@ -1,33 +1,53 @@
 
 import { TouchableOpacity, View } from "react-native"
-import { Fragment } from "react"
+import { Fragment, useEffect, useState } from "react"
+import { useNavigation, useRoute } from "@react-navigation/native";
+
+import { getMeals } from "@storage/meal/getMeals";
 
 import { Container, Header, IconGoBack, InfoText, Percent, Sequence, SequenceOrFailContent, StatsContent, StatsTitle } from "./styles"
-import { useNavigation } from "@react-navigation/native";
 
-type StatisticsProps = {
-  percent: number;
-  mealsOnDiet: number;
-  mealsOffDiet: number;
-  mealsSequenceOnDiet: number;
-  totalMeals: number;
+type RouteParams = {
+  dietPercent: string
 }
 
 export function Statistics() {
   const navigation = useNavigation()
+  const route = useRoute()
+  const [totalMeals, setTotalMeals] = useState<number>()
+  const [totalOffDietMeals, setTotalOffDietMeals] = useState<number>()
+  const [totalOnDietMeals, setTotalOnDietMeals] = useState<number>()
+
+  const { dietPercent } = route.params as RouteParams
+
+  async function registredMeals() {
+    const mealsData = await getMeals()
+
+    const mealsStoraged = mealsData.length
+    const offDietMeals = mealsData.filter(meal => meal.dietStatus === 'OFF_DIET').length
+    const onDietMeals = mealsData.filter(meal => meal.dietStatus === 'ON_DIET').length
+    
+    setTotalMeals(mealsStoraged)
+    setTotalOffDietMeals(offDietMeals)
+    setTotalOnDietMeals(onDietMeals)
+  }
+
+  useEffect(() => {
+    registredMeals()
+  }, [])
 
   return(
     <Fragment>
-      <Header variant={91.36 > 69.99 ? 'PRIMARY' : 'SECONDARY'}>
+      <Header variant={Number(dietPercent) > 69.99 ? 'PRIMARY' : 'SECONDARY'}>
         <View>
           <TouchableOpacity 
             onPress={() => navigation.navigate('home')}
             style={{ height: 24, width: 24 }}
           >
-            <IconGoBack variant={91.36 > 69.99 ? 'PRIMARY' : 'SECONDARY'} />
+            <IconGoBack variant={Number(dietPercent) > 69.99 ? 'PRIMARY' : 'SECONDARY'} />
           </TouchableOpacity>
 
-          <Percent>{91.36}%</Percent>
+          <Percent>{dietPercent}%</Percent>
 
           <InfoText>das refeições dentro da dieta</InfoText>
         </View>
@@ -43,20 +63,20 @@ export function Statistics() {
         </StatsContent>
 
         <StatsContent>
-          <Sequence>109</Sequence>
+          <Sequence>{totalMeals}</Sequence>
 
           <InfoText>refeições registradas</InfoText>
         </StatsContent>
 
         <View style={{ flexDirection: "row", marginTop: 10, gap: 10 }}>
           <SequenceOrFailContent variant="PRIMARY">
-            <Sequence>99</Sequence>
+            <Sequence>{totalOnDietMeals}</Sequence>
 
             <InfoText>refeições dentro da dieta</InfoText>
           </SequenceOrFailContent>
 
           <SequenceOrFailContent variant="SECONDARY">
-            <Sequence>10</Sequence>
+            <Sequence>{totalOffDietMeals}</Sequence>
 
             <InfoText>refeições fora da dieta</InfoText>
           </SequenceOrFailContent>

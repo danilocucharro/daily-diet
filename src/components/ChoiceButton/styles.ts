@@ -5,7 +5,7 @@ import { TouchableHighlight } from "react-native";
 type ChoiceButtonVariantStyleProps = 'PRIMARY' | 'SECONDARY'
 
 type ChoiceButtonStyleProps = {
-  variant: ChoiceButtonVariantStyleProps
+  variant: ChoiceButtonVariantStyleProps;
 }
 
 export const Container = styled(TouchableHighlight)`

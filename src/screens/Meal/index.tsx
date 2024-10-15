@@ -9,7 +9,6 @@ import { PencilSimpleLine, Trash } from "phosphor-react-native";
 import theme from "src/theme";
 import { DateType } from "react-native-ui-datepicker";
 import { deleteMeal } from "@storage/meal/deleteMeal";
-import { AppError } from "src/utils/AppError";
 
 type RouteParams = {
   mealName: string;
