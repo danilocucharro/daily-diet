@@ -9,6 +9,8 @@ import { Container, DatePickerModal, DateTimeInput, Form, Header, IconGoBack, In
 import { DateType } from "react-native-ui-datepicker";
 import dayjs from "dayjs";
 import { addMeal } from "@storage/meal/addMeal";
+import { addSequence } from "@storage/sequence/addSequence";
+import { stopSequence } from "@storage/sequence/stopSequence";
 
 export function NewMeal() {
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -28,6 +30,13 @@ export function NewMeal() {
 
     try {
       await addMeal(newMeal)
+      
+      if(newMeal.dietStatus === 'ON_DIET') {
+        await addSequence()
+      }
+      else {
+        await stopSequence()
+      }
 
       navigation.navigate('mealFeedback', { mealStatus })
     } catch (error) {

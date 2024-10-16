@@ -6,6 +6,9 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 import { getMeals } from "@storage/meal/getMeals";
 
 import { Container, Header, IconGoBack, InfoText, Percent, Sequence, SequenceOrFailContent, StatsContent, StatsTitle } from "./styles"
+import { getSequence } from "@storage/sequence/getSequence";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { SEQUENCE_COLLECTION } from "@storage/storageConfig";
 
 type RouteParams = {
   dietPercent: string
@@ -17,8 +20,14 @@ export function Statistics() {
   const [totalMeals, setTotalMeals] = useState<number>()
   const [totalOffDietMeals, setTotalOffDietMeals] = useState<number>()
   const [totalOnDietMeals, setTotalOnDietMeals] = useState<number>()
+  const [bestOnDietMealsSequence, setBestOnDietMealsSequence] = useState<number>()
 
   const { dietPercent } = route.params as RouteParams
+
+  async function fetchSequences() {
+    const { bestSequence } = await getSequence()
+    setBestOnDietMealsSequence(bestSequence)
+  }
 
   async function registredMeals() {
     const mealsData = await getMeals()
@@ -34,6 +43,7 @@ export function Statistics() {
 
   useEffect(() => {
     registredMeals()
+    fetchSequences()
   }, [])
 
   return(
@@ -57,7 +67,7 @@ export function Statistics() {
         <StatsTitle>Estatísticas gerais</StatsTitle>
 
         <StatsContent>
-          <Sequence>22</Sequence>
+          <Sequence>{bestOnDietMealsSequence}</Sequence>
 
           <InfoText>melhor sequência de pratos dentro da dieta</InfoText>
         </StatsContent>
