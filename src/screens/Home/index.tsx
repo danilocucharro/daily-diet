@@ -1,4 +1,4 @@
-import { FlatList, View } from "react-native";
+import { Text, SectionList, View } from "react-native";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { useCallback, useState } from "react";
 
@@ -13,12 +13,15 @@ import { Container, DailyListTitle, Header, Logo, MealsTitle, UserInfo } from ".
 
 import { Plus } from "phosphor-react-native";
 
-import { MealStorageDTO } from "@storage/meal/MealStorageDTO";
 import { getMeals } from "@storage/meal/getMeals";
 import { Loading } from "@components/Loading";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { MEAL_COLLECTION, SEQUENCE_COLLECTION } from "@storage/storageConfig";
+import { MealSectionStorageDTO } from "@storage/meal/MealSectionStorageDTO";
+import { DateType } from "react-native-ui-datepicker";
 
 export function Home() {
-  const [meals, setMeals] = useState<MealStorageDTO[]>([])
+  const [meals, setMeals] = useState<MealSectionStorageDTO[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const navigation = useNavigation()
 
@@ -27,6 +30,7 @@ export function Home() {
       setIsLoading(true)
 
       const mealsData = await getMeals()
+
       setMeals(mealsData)
     } catch (error) {
       throw error
@@ -35,8 +39,23 @@ export function Home() {
     }
   }
 
+  function handleNavigateMealInfo(
+    mealName: string, 
+    mealDescription: string, 
+    dietStatus: 'ON_DIET' | 'OFF_DIET',
+    createdAt: DateType
+  ) {
+    navigation.navigate("meal", {
+      mealName: mealName,
+      mealDescription: mealDescription,
+      dietStatus: dietStatus,
+      createdAt: createdAt
+    })
+  }
+
   useFocusEffect(useCallback(() => {
     fetchMeals()
+    //AsyncStorage.removeItem(MEAL_COLLECTION)
   }, []))
 
   return(
@@ -49,7 +68,7 @@ export function Home() {
       
       <DietStats />
 
-      <View style={{marginBottom: 10, gap: 4}}>
+      <View style={{gap: 4}}>
         <MealsTitle>Refeições</MealsTitle>
         
         <Button 
@@ -61,27 +80,27 @@ export function Home() {
       </View>
         
       {isLoading ? <Loading/> : (
-        <>
-          <DailyListTitle>22.09.24</DailyListTitle>
-          <FlatList
-            data={meals}
-            keyExtractor={item => item.description}
-            renderItem={({ item }) => (
-              <MealCard 
-                mealName={item.name}
-                createdAt={item.createdAt}
-                dietIndicator={item.dietStatus}
-                onPress={() => navigation.navigate('meal', {
-                  mealName: item.name,
-                  mealDescription: item.description,
-                  createdAt: item.createdAt,
-                  dietStatus: item.dietStatus
-                })}
-              />
-            )}
-            showsVerticalScrollIndicator={false}
-          />
-        </>
+        <SectionList 
+          sections={meals}
+          keyExtractor={(item, index) => item.description + index}
+          renderItem={({ item }) => (
+            <MealCard 
+              mealName={item.name}
+              dietIndicator={item.dietStatus}
+              createdAt={item.hour}
+              onPress={() => handleNavigateMealInfo(
+                item.name,
+                item.description,
+                item.dietStatus,
+                item.createdAt
+              )}
+            />
+          )}
+          renderSectionHeader={({section: {date}}) => (
+            <DailyListTitle>{date?.toString()}</DailyListTitle>
+          )}
+          showsVerticalScrollIndicator={false}
+        />
       )}
     </Container>
     )

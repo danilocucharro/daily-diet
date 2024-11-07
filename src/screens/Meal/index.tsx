@@ -9,6 +9,7 @@ import { PencilSimpleLine, Trash } from "phosphor-react-native";
 import theme from "src/theme";
 import { DateType } from "react-native-ui-datepicker";
 import { deleteMeal } from "@storage/meal/deleteMeal";
+import dayjs from "dayjs";
 
 type RouteParams = {
   mealName: string;
@@ -29,6 +30,7 @@ export function Meal() {
 
   function handleEditMeal() {
     navigation.navigate('editMeal', {
+      mealDate: dayjs(createdAt).format('DD.MM.YYYY'),
       mealName: mealName,
       mealDescription: mealDescription
     })

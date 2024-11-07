@@ -17,9 +17,9 @@ type RouteParams = {
 export function Statistics() {
   const navigation = useNavigation()
   const route = useRoute()
-  const [totalMeals, setTotalMeals] = useState<number>()
-  const [totalOffDietMeals, setTotalOffDietMeals] = useState<number>()
-  const [totalOnDietMeals, setTotalOnDietMeals] = useState<number>()
+  const [totalMeals, setTotalMeals] = useState<number>(0)
+  const [totalOffDietMeals, setTotalOffDietMeals] = useState<number>(0)
+  const [totalOnDietMeals, setTotalOnDietMeals] = useState<number>(0)
   const [bestOnDietMealsSequence, setBestOnDietMealsSequence] = useState<number>()
 
   const { dietPercent } = route.params as RouteParams
@@ -29,20 +29,31 @@ export function Statistics() {
     setBestOnDietMealsSequence(bestSequence)
   }
 
-  async function registredMeals() {
+  async function getOnDietMeals() {
     const mealsData = await getMeals()
+    //lista todas as refeicoes ON_DIET salvas no app separadas por data em um array diferente
+    const mealsOnDietList = mealsData.map(meal => meal.data.filter(meal => meal.dietStatus !== 'OFF_DIET').length);
+    //
+    const mealsOnDiet = mealsOnDietList.reduce(
+      (acc, totalOnDietMeals) => acc + totalOnDietMeals, 0)
+    setTotalOnDietMeals(mealsOnDiet)
+    setTotalMeals((prevState) => prevState + mealsOnDiet)
+  }
 
-    const mealsStoraged = mealsData.length
-    const offDietMeals = mealsData.filter(meal => meal.dietStatus === 'OFF_DIET').length
-    const onDietMeals = mealsData.filter(meal => meal.dietStatus === 'ON_DIET').length
-    
-    setTotalMeals(mealsStoraged)
-    setTotalOffDietMeals(offDietMeals)
-    setTotalOnDietMeals(onDietMeals)
+  async function getOffDietMeals() {
+    const mealsData = await getMeals()
+    //lista todas as refeicoes OFF_DIET salvas no app separadas por data em um array diferente
+    const mealsOffDietList = mealsData.map(meal => meal.data.filter(meal => meal.dietStatus !== 'ON_DIET').length);
+    //
+    const mealsOffDiet = mealsOffDietList.reduce(
+      (acc, totalOnDietMeals) => acc + totalOnDietMeals, 0)
+    setTotalOffDietMeals(mealsOffDiet)
+    setTotalMeals((prevState) => prevState + mealsOffDiet)
   }
 
   useEffect(() => {
-    registredMeals()
+    getOnDietMeals()
+    getOffDietMeals()
     fetchSequences()
   }, [])
 

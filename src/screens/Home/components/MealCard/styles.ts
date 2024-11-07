@@ -8,7 +8,7 @@ type MealCardStyleProps = {
 }
 
 export const Container = styled(TouchableOpacity)`
-  flex: 1;
+  width: 100%;
   flex-direction: row;
 
   margin-top: 8px;
@@ -21,7 +21,7 @@ export const Container = styled(TouchableOpacity)`
   background-color: ${({ theme }) => theme.COLORS.GRAY_200};
   border: 1px solid ${({ theme }) => theme.COLORS.GRAY_300};
   border-radius: 6px;
-`
+`;
 
 export const MealDate = styled.Text`
   font-family: ${({ theme }) => theme.FONT_FAMILY.BOLD};

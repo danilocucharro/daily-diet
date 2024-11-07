@@ -1,5 +1,5 @@
 import { View } from "react-native";
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useState } from "react";
 import { useNavigation, useRoute } from "@react-navigation/native";
 
 import { Button } from "@components/Button";
@@ -16,7 +16,7 @@ import { DatePickerModal } from "@screens/NewMeal/styles";
 type RouteParams = {
   mealName: string;
   mealDescription: string;
-  createdAt: string;
+  createdAt: DateType;
   dietStatus: 'ON_DIET' | 'OFF_DIET'
 }
 
@@ -26,6 +26,7 @@ export function EditMeal() {
   const { 
     mealName,
     mealDescription,
+    createdAt
   } = route.params as RouteParams
 
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -40,19 +41,17 @@ export function EditMeal() {
         name: newMealName === "" ? mealName : newMealName,
         description: newMealDescription === "" ? mealDescription : newMealDescription,
         dietStatus: mealStatus,
-        createdAt: date
+        createdAt: date,
+        hour: dayjs(date).format('HH:mm')
       }
 
-      await updateMeal(mealDescription, mealUpdated)
+      const oldMealDate = dayjs(createdAt).format('DD.MM.YYYY')
 
-      navigation.navigate('meal', {
-        mealName: newMealName === "" ? mealName : newMealName,
-        mealDescription: newMealDescription === "" ? mealDescription : newMealDescription,
-        createdAt: date,
-        dietStatus: mealStatus
-      })
+      await updateMeal(oldMealDate, mealDescription, mealUpdated)
+
+      navigation.navigate('home')
     } catch (error) {
-      
+      throw error
     }
   }
 

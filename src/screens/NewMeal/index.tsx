@@ -17,7 +17,7 @@ export function NewMeal() {
   const [newMealName, setNewMealName] = useState("")
   const [newMealDescription, setNewMealDescription] = useState("")
   const [mealStatus, setMealStatus] = useState<'ON_DIET' | 'OFF_DIET'>("ON_DIET")
-  const [date, setDate] = useState<DateType>(dayjs())
+  const [date, setDate] = useState<DateType>()
   const navigation = useNavigation()
 
   async function handleAddNewMeal() {
@@ -25,7 +25,8 @@ export function NewMeal() {
       name: newMealName,
       description: newMealDescription,
       dietStatus: mealStatus,
-      createdAt: date
+      createdAt: dayjs(date).format('DD.MM.YYYY'),
+      hour: dayjs(date).format('HH:mm')
     }
 
     try {
@@ -87,8 +88,9 @@ export function NewMeal() {
             <InputLabel>Data e Hora</InputLabel>
             <Input 
               onPress={() => setIsModalOpen(!isModalOpen)}
-              value={date?.toString()}
+              value={dayjs(date).format('DD.MM.YYYY HH:mm')}
               showSoftInputOnFocus={false}
+              keyboardType="numeric"
             />
           </InputContainer>
 

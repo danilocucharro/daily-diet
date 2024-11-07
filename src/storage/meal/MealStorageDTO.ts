@@ -4,5 +4,6 @@ export type MealStorageDTO = {
   name: string;
   description: string;
   dietStatus: 'ON_DIET' | 'OFF_DIET';
-  createdAt: DateType
+  createdAt: DateType,
+  hour: DateType
 }
