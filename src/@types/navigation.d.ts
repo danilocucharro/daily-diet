@@ -18,7 +18,7 @@ export declare global {
         dietStatus: 'ON_DIET' | 'OFF_DIET'
       };
       editMeal: {
-        mealDate: DateType;
+        createdAt: DateType;
         mealName: string;
         mealDescription: string;
       };

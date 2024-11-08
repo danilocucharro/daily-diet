@@ -1,5 +1,5 @@
-import { View } from "react-native";
-import { Fragment, useState } from "react";
+import { Alert, View } from "react-native";
+import { Fragment, useEffect, useState } from "react";
 import { useNavigation, useRoute } from "@react-navigation/native";
 
 import { Button } from "@components/Button";
@@ -41,15 +41,22 @@ export function EditMeal() {
         name: newMealName === "" ? mealName : newMealName,
         description: newMealDescription === "" ? mealDescription : newMealDescription,
         dietStatus: mealStatus,
-        createdAt: date,
+        createdAt: dayjs(date).format('DD.MM.YYYY'),
         hour: dayjs(date).format('HH:mm')
       }
 
-      const oldMealDate = dayjs(createdAt).format('DD.MM.YYYY')
+      const oldMealDate = createdAt
+
+      console.log("mealUpdated: ", mealUpdated.createdAt, "oldMealDate: ", oldMealDate)
+
+      if(mealUpdated.createdAt !== oldMealDate) {
+        Alert.alert("Data incorreta", `A data precisa ser a mesma que foi informada quando a refeição foi cadastrada (${oldMealDate})`)
+        return
+      }
 
       await updateMeal(oldMealDate, mealDescription, mealUpdated)
-
       navigation.navigate('home')
+
     } catch (error) {
       throw error
     }
@@ -58,6 +65,10 @@ export function EditMeal() {
   function handleChangeDietStatus(status: 'ON_DIET' | 'OFF_DIET') {
     setMealStatus(status)
   }
+
+  useEffect(() => {
+    console.log(createdAt)
+  })
 
   return(
     <Fragment>

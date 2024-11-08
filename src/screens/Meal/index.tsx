@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import { Fragment, useEffect } from "react";
 import { useNavigation, useRoute } from "@react-navigation/native";
 
 import { Header, Container, IconGoBack, Title, MealName, InfoMealContent, MealDescription, MealDate, ButtonContainer } from "./styles";
@@ -30,14 +30,13 @@ export function Meal() {
 
   function handleEditMeal() {
     navigation.navigate('editMeal', {
-      mealDate: dayjs(createdAt).format('DD.MM.YYYY'),
+      createdAt: createdAt,
       mealName: mealName,
       mealDescription: mealDescription
     })
   }
 
   async function handleDeleteMeal() {
-    const mealDate = dayjs(createdAt).format('DD.MM.YYYY')
     Alert.alert("Excluir", "Deseja excluir essa refeição?", [
       {
         text: "Não",
@@ -55,10 +54,14 @@ export function Meal() {
     ])
   }
 
+  useEffect(() => {
+    console.log(createdAt)
+  }, [])
+
   return(
     <Fragment>
       <Header variant={dietStatus === 'ON_DIET' ? 'PRIMARY' : 'SECONDARY'}>
-        <IconGoBack onPress={() => navigation.navigate('home')}/>
+        <IconGoBack onPress={() => navigation.navigate('home')} />
 
         <Title>Refeição</Title>
       </Header>

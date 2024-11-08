@@ -7,9 +7,9 @@ import { DateType } from "react-native-ui-datepicker";
 export async function updateMeal(mealDate: DateType, oldMealDescription: string, mealUpdated: MealStorageDTO) {
   try {
     const mealsStoraged = await getMeals()
+    const oldMealSection = mealsStoraged.filter(section => section.date === mealDate)
+
     const newMealsStoraged = mealsStoraged.filter(section => section.date !== mealDate)
-    
-    const oldMealSection = mealsStoraged.filter(meal => meal.date === mealDate)
     const newMealDataList = oldMealSection[0].data
 
     const mealListUpdated = newMealDataList.filter(meal => meal.description !== oldMealDescription)
@@ -19,6 +19,8 @@ export async function updateMeal(mealDate: DateType, oldMealDescription: string,
       date: mealDate,
       data: mealListUpdated
     }
+
+    console.log([mealListUpdated, ...newMealsStoraged])
 
     await AsyncStorage.setItem(MEAL_COLLECTION, JSON.stringify([mealSectionUpdated, ...newMealsStoraged]))
   } catch (error) {

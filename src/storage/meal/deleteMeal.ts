@@ -11,6 +11,7 @@ export async function deleteMeal(mealDate: DateType, mealDescription: string) {
     const mealsStoraged = await getMeals()
     
     const oldSectionList = mealsStoraged.filter(section => section.date === mealDate)
+    console.log(mealDate)
 
     if(oldSectionList[0].data.length > 1) {
       const newMealList = oldSectionList[0].data.filter(meal => meal.description !== mealDescription)
