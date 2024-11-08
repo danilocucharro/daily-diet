@@ -37,6 +37,7 @@ export function Meal() {
   }
 
   async function handleDeleteMeal() {
+    const mealDate = dayjs(createdAt).format('DD.MM.YYYY')
     Alert.alert("Excluir", "Deseja excluir essa refeição?", [
       {
         text: "Não",
@@ -45,9 +46,10 @@ export function Meal() {
       {
         text: "Sim",
         onPress: async () => {
-          await deleteMeal(mealDescription)
-          navigation.navigate("home")
+          await deleteMeal(createdAt, mealDescription)
+          
           Alert.alert("Excluir", "A refeição foi removida!")
+          navigation.navigate("home")
         }
       }
     ])
