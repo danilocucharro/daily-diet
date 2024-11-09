@@ -55,6 +55,7 @@ export function EditMeal() {
       }
 
       await updateMeal(oldMealDate, mealDescription, mealUpdated)
+      Alert.alert("Sucesso", "Refeição atualizada com êxito!")
       navigation.navigate('home')
 
     } catch (error) {

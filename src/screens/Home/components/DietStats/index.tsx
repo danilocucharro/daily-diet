@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 import { getMeals } from "@storage/meal/getMeals";
 
 import { Container, IconLinkIndicator, InfoText, Percent } from "./styles";
+import { getOnDietMeals } from "@storage/meal/getOnDietMeals";
+import { getOffDietMeals } from "@storage/meal/getOffDietMeals";
 
 type DietStatsProps = TouchableOpacityProps
 
@@ -21,16 +23,16 @@ export function DietStats({ ...rest }: DietStatsProps) {
   }
 
   async function gettingDietPercentageStats() {
-    const mealsData = await getMeals()
-    const totalMeals = mealsData.length
-    const totalOnDietMeals = mealsData.filter(meal => meal.dietStatus === 'ON_DIET').length
+    const totalOnDietMeals = await getOnDietMeals()
+    const totalOffDietMeals = await getOffDietMeals() 
+    const totalMeals = totalOnDietMeals + totalOffDietMeals
 
     calcPercent(totalMeals, totalOnDietMeals)
   }
 
   function handleNavigateStatsScreen() {
     navigation.navigate('statistics', {
-      dietPercent: percent === undefined ? "0" : percent
+      dietPercent: percent as string
     })
   }
 

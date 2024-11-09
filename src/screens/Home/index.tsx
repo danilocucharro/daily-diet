@@ -55,7 +55,7 @@ export function Home() {
 
   useFocusEffect(useCallback(() => {
     fetchMeals()
-    //AsyncStorage.removeItem(MEAL_COLLECTION)
+    //AsyncStorage.removeItem(SEQUENCE_COLLECTION)
   }, []))
 
   return(
