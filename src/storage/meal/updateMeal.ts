@@ -20,8 +20,6 @@ export async function updateMeal(mealDate: DateType, oldMealDescription: string,
       data: mealListUpdated
     }
 
-    console.log([mealListUpdated, ...newMealsStoraged])
-
     await AsyncStorage.setItem(MEAL_COLLECTION, JSON.stringify([mealSectionUpdated, ...newMealsStoraged]))
   } catch (error) {
     throw error

@@ -47,8 +47,6 @@ export function EditMeal() {
 
       const oldMealDate = createdAt
 
-      console.log("mealUpdated: ", mealUpdated.createdAt, "oldMealDate: ", oldMealDate)
-
       if(mealUpdated.createdAt !== oldMealDate) {
         Alert.alert("Data incorreta", `A data precisa ser a mesma que foi informada quando a refeição foi cadastrada (${oldMealDate})`)
         return
@@ -66,10 +64,6 @@ export function EditMeal() {
   function handleChangeDietStatus(status: 'ON_DIET' | 'OFF_DIET') {
     setMealStatus(status)
   }
-
-  useEffect(() => {
-    console.log(createdAt)
-  })
 
   return(
     <Fragment>
@@ -119,15 +113,23 @@ export function EditMeal() {
             <InputLabel>Está dentro da dieta?</InputLabel>
 
             <View style={{ flexDirection: "row", gap: 20 }}>
-              <ChoiceButton 
+            <ChoiceButton 
                 title="Sim" 
                 variant="PRIMARY"
                 onPress={() => handleChangeDietStatus("ON_DIET")}
+                style={{
+                  backgroundColor: mealStatus === 'ON_DIET' ? "#E5F0DB" : "#EFF0F0",
+                  borderColor: mealStatus === 'ON_DIET' ? "#CBE4B4" : "#EFF0F0"
+                }}
               />
               <ChoiceButton 
                 title="Não" 
                 variant="SECONDARY"
                 onPress={() => handleChangeDietStatus("OFF_DIET")}
+                style={{
+                  backgroundColor: mealStatus === 'OFF_DIET' ? "#F4E6E7" : "#EFF0F0",
+                  borderColor: mealStatus === 'OFF_DIET' ? "#F3BABD" : "#EFF0F0"
+                }}
               />
             </View>
           </InputContainer>

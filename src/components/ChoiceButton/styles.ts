@@ -16,6 +16,7 @@ export const Container = styled(TouchableHighlight)`
   justify-content: center;
 
   background-color: ${({ theme }) => theme.COLORS.GRAY_200};
+  border: 1px;
   border-radius: 6px;
 `;
 

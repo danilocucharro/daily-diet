@@ -1,15 +1,19 @@
 import { Fragment, useEffect } from "react";
 import { useNavigation, useRoute } from "@react-navigation/native";
+import { Alert, View } from "react-native";
 
 import { Header, Container, IconGoBack, Title, MealName, InfoMealContent, MealDescription, MealDate, ButtonContainer } from "./styles";
-import { Alert, View } from "react-native";
+
 import { DietStatusCard } from "./components/DietStatusCard";
 import { Button } from "@components/Button";
+
 import { PencilSimpleLine, Trash } from "phosphor-react-native";
-import theme from "src/theme";
 import { DateType } from "react-native-ui-datepicker";
+
 import { deleteMeal } from "@storage/meal/deleteMeal";
-import dayjs from "dayjs";
+
+import theme from "src/theme";
+
 
 type RouteParams = {
   mealName: string;
@@ -53,10 +57,6 @@ export function Meal() {
       }
     ])
   }
-
-  useEffect(() => {
-    console.log(createdAt)
-  }, [])
 
   return(
     <Fragment>

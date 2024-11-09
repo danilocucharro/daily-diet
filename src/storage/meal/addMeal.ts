@@ -42,7 +42,7 @@ export async function addMeal(meal: MealStorageDTO) {
       }
 
       mealsList.data.push(newMeal)
-      console.log(mealsList)
+      
       await AsyncStorage.setItem(MEAL_COLLECTION, JSON.stringify([
         mealsList,
         ...newMealsData

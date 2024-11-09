@@ -8,6 +8,7 @@ import { ChoiceButton } from "@components/ChoiceButton";
 import { Container, DatePickerModal, DateTimeInput, Form, Header, IconGoBack, Input, InputContainer, InputLabel, SaveDateTimeButton, Title, TitleButton } from "./styles";
 import { DateType } from "react-native-ui-datepicker";
 import dayjs from "dayjs";
+
 import { addMeal } from "@storage/meal/addMeal";
 import { addSequence } from "@storage/sequence/addSequence";
 import { stopSequence } from "@storage/sequence/stopSequence";
@@ -102,11 +103,19 @@ export function NewMeal() {
                 title="Sim" 
                 variant="PRIMARY"
                 onPress={() => handleChangeDietStatus("ON_DIET")}
+                style={{
+                  backgroundColor: mealStatus === 'ON_DIET' ? "#E5F0DB" : "#EFF0F0",
+                  borderColor: mealStatus === 'ON_DIET' ? "#CBE4B4" : "#EFF0F0"
+                }}
               />
               <ChoiceButton 
                 title="Não" 
                 variant="SECONDARY"
                 onPress={() => handleChangeDietStatus("OFF_DIET")}
+                style={{
+                  backgroundColor: mealStatus === 'OFF_DIET' ? "#F4E6E7" : "#EFF0F0",
+                  borderColor: mealStatus === 'OFF_DIET' ? "#F3BABD" : "#EFF0F0"
+                }}
               />
             </View>
           </InputContainer>

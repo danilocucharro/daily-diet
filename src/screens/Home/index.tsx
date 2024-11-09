@@ -1,4 +1,4 @@
-import { Text, SectionList, View } from "react-native";
+import { SectionList, View, Text } from "react-native";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { useCallback, useState } from "react";
 
@@ -15,10 +15,10 @@ import { Plus } from "phosphor-react-native";
 
 import { getMeals } from "@storage/meal/getMeals";
 import { Loading } from "@components/Loading";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { MEAL_COLLECTION, SEQUENCE_COLLECTION } from "@storage/storageConfig";
 import { MealSectionStorageDTO } from "@storage/meal/MealSectionStorageDTO";
 import { DateType } from "react-native-ui-datepicker";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { MEAL_COLLECTION } from "@storage/storageConfig";
 
 export function Home() {
   const [meals, setMeals] = useState<MealSectionStorageDTO[]>([])
@@ -55,7 +55,7 @@ export function Home() {
 
   useFocusEffect(useCallback(() => {
     fetchMeals()
-    //AsyncStorage.removeItem(SEQUENCE_COLLECTION)
+    AsyncStorage.removeItem(MEAL_COLLECTION)
   }, []))
 
   return(
@@ -80,27 +80,40 @@ export function Home() {
       </View>
         
       {isLoading ? <Loading/> : (
-        <SectionList 
-          sections={meals}
-          keyExtractor={(item, index) => item.description + index}
-          renderItem={({ item }) => (
-            <MealCard 
-              mealName={item.name}
-              dietIndicator={item.dietStatus}
-              createdAt={item.hour}
-              onPress={() => handleNavigateMealInfo(
-                item.name,
-                item.description,
-                item.dietStatus,
-                item.createdAt
-              )}
-            />
-          )}
-          renderSectionHeader={({section: {date}}) => (
-            <DailyListTitle>{date?.toString()}</DailyListTitle>
-          )}
-          showsVerticalScrollIndicator={false}
-        />
+        meals.length > 0 ? (
+          <SectionList 
+            sections={meals}
+            keyExtractor={(item, index) => item.description + index}
+            renderItem={({ item }) => (
+              <MealCard 
+                mealName={item.name}
+                dietIndicator={item.dietStatus}
+                createdAt={item.hour}
+                onPress={() => handleNavigateMealInfo(
+                  item.name,
+                  item.description,
+                  item.dietStatus,
+                  item.createdAt
+                )}
+              />
+            )}
+            renderSectionHeader={({section: {date}}) => (
+              <DailyListTitle>{date?.toString()}</DailyListTitle>
+            )}
+            showsVerticalScrollIndicator={false}
+          />
+        ) : (
+          <View style={{flex: 1, justifyContent: "center"}}>
+            <Text
+              style={{
+                color: "#000000",
+                textAlign: "center"
+              }}
+            >
+              Você ainda não tem refeições cadastradas.
+            </Text>
+          </View>
+        )
       )}
     </Container>
     )
