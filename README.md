@@ -21,10 +21,16 @@
 - **Offline Mode**: Access meal data offline with local storage support.
   
 ## Screenshots
-![app_daily-diet_screen_home](https://github.com/user-attachments/assets/04294823-1564-4ffa-9dc3-10abc85e73b6)
-![app_daily-diet_screen_newMeal](https://github.com/user-attachments/assets/7231e8aa-6d78-4841-8e21-46cb38322914)
-![app_daily-diet_screen_meal](https://github.com/user-attachments/assets/65f54fc2-816b-4300-a0a8-e54992d3a198)
-![app_daily-diet_screen_estatistics](https://github.com/user-attachments/assets/cf338aeb-83a1-4991-bda8-4e2d381e043d)
+![]()
+![]()
+![]()
+![]()
+<div display="flex">
+  <img src="https://github.com/user-attachments/assets/04294823-1564-4ffa-9dc3-10abc85e73b6" alt="app_daily-diet_screen_home" width="300" height="700" />
+  <img src="https://github.com/user-attachments/assets/7231e8aa-6d78-4841-8e21-46cb38322914" alt="app_daily-diet_screen_newMeal" width="300" height="700" />
+  <img src="https://github.com/user-attachments/assets/65f54fc2-816b-4300-a0a8-e54992d3a198" alt="app_daily-diet_screen_meal" width="300" height="700" />
+  <img src="https://github.com/user-attachments/assets/cf338aeb-83a1-4991-bda8-4e2d381e043d" alt="app_daily-diet_screen_estatistics" width="300" height="700" />
+</div>
 
 
 
