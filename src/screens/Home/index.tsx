@@ -17,8 +17,6 @@ import { getMeals } from "@storage/meal/getMeals";
 import { Loading } from "@components/Loading";
 import { MealSectionStorageDTO } from "@storage/meal/MealSectionStorageDTO";
 import { DateType } from "react-native-ui-datepicker";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { MEAL_COLLECTION } from "@storage/storageConfig";
 
 export function Home() {
   const [meals, setMeals] = useState<MealSectionStorageDTO[]>([])
@@ -55,7 +53,6 @@ export function Home() {
 
   useFocusEffect(useCallback(() => {
     fetchMeals()
-    AsyncStorage.removeItem(MEAL_COLLECTION)
   }, []))
 
   return(

@@ -65,7 +65,7 @@ export function Statistics() {
             <IconGoBack variant={Number(dietPercent) > 69.99 ? 'PRIMARY' : 'SECONDARY'} />
           </TouchableOpacity>
 
-          <Percent>{dietPercent}%</Percent>
+          <Percent>{dietPercent === typeof NaN ? 0 : dietPercent}%</Percent>
 
           <InfoText>das refeições dentro da dieta</InfoText>
         </View>

@@ -49,7 +49,7 @@ export function DietStats({ ...rest }: DietStatsProps) {
       <IconLinkIndicator variant={Number(percent) > 69.99 ? 'PRIMARY' : 'SECONDARY'} />
 
       <Percent>
-        {percent}%
+        {percent === typeof NaN ? 0 : percent}%
       </Percent>
       <InfoText>das refeições dentro da dieta</InfoText>
     </Container>
